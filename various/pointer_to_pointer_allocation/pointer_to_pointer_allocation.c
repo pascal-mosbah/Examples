@@ -13,7 +13,7 @@ int main(){
 
 	float rand_limit = 100.f;
 
-	const size_t size = 10;
+	const size_t size = 5;
 	// allocate for a square matrix whitout checking
 
 	mat = (int **) malloc(size * sizeof(int *));

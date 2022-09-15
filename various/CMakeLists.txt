@@ -4,3 +4,4 @@ PROJECT(various)
 
 add_subdirectory(read_a_char)
 add_subdirectory(pointer_to_pointer_allocation)
+add_subdirectory(copy_constructor)
