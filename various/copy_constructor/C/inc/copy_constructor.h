@@ -4,10 +4,11 @@
 typedef struct Very_simple_array {
 	size_t size;
 	int *tab;
+	char *name;
 } Very_simple_array;
 
 
-Very_simple_array init_Very_simple_array(size_t size);
+Very_simple_array init_Very_simple_array(size_t size, const char *name);
 
 Very_simple_array buggy_copy_Very_simple_array(const Very_simple_array *old_array);
 
