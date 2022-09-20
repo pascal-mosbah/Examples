@@ -4,4 +4,5 @@ PROJECT(all)
 
 add_subdirectory(CMake)
 add_subdirectory(various)
+add_subdirectory(TP)
 
