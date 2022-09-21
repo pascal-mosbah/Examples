@@ -21,10 +21,10 @@ int main(){
 	for(int i = 0; i < size;++i){
 		mat[i] = (int *) malloc(size * sizeof(int));
 	}
-	srand(time(NULL));
+	srand((unsigned)time(NULL));
 	for(int i = 0; i < size;++i){
 		for(int j = 0; j < size;++j){
-			mat[i][j] = rand() * rand_limit / (float) RAND_MAX + 1;
+			mat[i][j] = (int)(rand() * rand_limit / (float) RAND_MAX + 1);
 		}
 	}
 

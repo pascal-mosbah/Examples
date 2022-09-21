@@ -17,7 +17,7 @@ int main()
 			std::cout << c << " "<< my_caracters[c]<<std::endl;
 		}
 		std::string line;
-		int number_of_characters = 0, number_of_words = 0, number_of_lines = 0;
+		size_t number_of_characters = 0, number_of_words = 0, number_of_lines = 0;
 		while (std::getline(my_file, line)) {
 			++number_of_lines;
 			std::string word;

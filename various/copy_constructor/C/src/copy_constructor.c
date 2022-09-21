@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <string.h>
 #include <stdio.h>
 
@@ -10,7 +11,7 @@ Very_simple_array init_Very_simple_array(size_t size, const char *name)
         Very_simple_array array;
         array.size = size;
         array.tab = (int *)malloc(array.size * sizeof(int));
-        array.name = strdup(name);
+        array.name = _strdup(name);
         return array;
 }
 
@@ -20,7 +21,7 @@ Very_simple_array buggy_copy_Very_simple_array(const Very_simple_array *old_arra
         Very_simple_array array;
         array.size = old_array->size;
         array.tab = old_array->tab;
-        array.name = strdup(old_array->name);
+        array.name = _strdup(old_array->name);
         array.name = (char *)realloc(array.name, (strlen(array.name) + strlen(add_suffix) + 1) * sizeof(char));
         strcat(array.name, add_suffix);
         return array;
