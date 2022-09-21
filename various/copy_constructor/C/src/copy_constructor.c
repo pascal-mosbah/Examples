@@ -2,6 +2,9 @@
 #include <string.h>
 #include <stdio.h>
 
+#ifdef WIN32
+#define strdup _strdup
+#endif
 #include "copy_constructor.h"
 
 // Warning memory allocation not checked
@@ -11,7 +14,7 @@ Very_simple_array init_Very_simple_array(size_t size, const char *name)
         Very_simple_array array;
         array.size = size;
         array.tab = (int *)malloc(array.size * sizeof(int));
-        array.name = _strdup(name);
+        array.name = strdup(name);
         return array;
 }
 
@@ -21,7 +24,7 @@ Very_simple_array buggy_copy_Very_simple_array(const Very_simple_array *old_arra
         Very_simple_array array;
         array.size = old_array->size;
         array.tab = old_array->tab;
-        array.name = _strdup(old_array->name);
+        array.name = strdup(old_array->name);
         array.name = (char *)realloc(array.name, (strlen(array.name) + strlen(add_suffix) + 1) * sizeof(char));
         strcat(array.name, add_suffix);
         return array;

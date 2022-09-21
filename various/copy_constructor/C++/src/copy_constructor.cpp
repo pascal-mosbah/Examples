@@ -54,5 +54,5 @@ Very_simple_array_buggy::Very_simple_array_buggy(Very_simple_array &other) // No
 {
         this->name = other.get_name() + "_copy_buggy";
         this->size = other.get_size();
-        this->tab  = other.get_relaxed_tab(); // Not to do for purpose only !
+        this->tab  = other.get_relaxed_tab(); 
 }
