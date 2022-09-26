@@ -34,6 +34,7 @@ Very_simple_array copy_Very_simple_array(const Very_simple_array *old_array)
 {
         const char add_suffix[] = "_copy";
         Very_simple_array array = init_Very_simple_array(old_array->size, old_array->name);
+        memcpy(array.tab, old_array->tab, array.size * sizeof(int));
         array.name = (char *)realloc(array.name, (strlen(array.name) + strlen(add_suffix) + 1) * sizeof(char));
         strcat(array.name, add_suffix);
         return array;
