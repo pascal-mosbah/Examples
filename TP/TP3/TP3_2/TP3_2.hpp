@@ -13,19 +13,21 @@ class Point3D {
 		
 		// Setters and getters
 		Point3D &setXYZ(const float &newx, const float &newy, const float &newz);
-		// void setX(const float &newx);
-		// void setY(const float &newy);
-		// void setZ(const float &newz);
+
+        unsigned get_nb();
 		float getX();
 		float getY();
 		float getZ();
 
-        unsigned get_nb();
 
 		void print();    // prints the coordinates of the point
 
-		// other methods
-		// float distanceTo(const Point3D &otherPoint3D);
+		void print_other() const;    // prints the coordinates of the point
+
+		void print(const Point3D &other);
+
+		// testing methods
+		void print_other(const Point3D &otherPoint3D);
 };
 
 constexpr size_t numberOfPoints = 10;
@@ -33,7 +35,6 @@ class Trajectory{
 	private:
 		Point3D points[numberOfPoints];
 	public:
-        Trajectory();
 		void print(); // print the coordinates of all points
 		Point3D & getPoint(const size_t &n); // returns the reference of point n
 		float getTotalDistance();
