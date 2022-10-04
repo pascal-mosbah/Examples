@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
+#include <chrono>
 
 using namespace std;
 
@@ -29,7 +30,7 @@ void my_allocation_using_C(T_ *&ptr, const size_t &new_size)
     if (ptr)
     {
         auto old_ptr = ptr;
-        ptr = static_cast<T_*>(realloc(ptr, new_size * sizeof(T_)));
+        ptr = static_cast<T_ *>(realloc(ptr, new_size * sizeof(T_)));
         if (!ptr)
         {
             cout << "Bad allocation using malloc" << endl;
@@ -42,23 +43,26 @@ void my_allocation_using_C(T_ *&ptr, const size_t &new_size)
     }
     else
     {
-        ptr = static_cast<T_*>(malloc(new_size * sizeof(T_)));
+        ptr = static_cast<T_ *>(malloc(new_size * sizeof(T_)));
     }
     ++count;
 }
 
 int main()
 {
-    const size_t size = 1 << 30;
-    cout << size << endl;
+    const size_t increment = 1 << 18;
+    cout << increment << endl;
     float *tab_float = nullptr;
     float *tab_float_using_C = nullptr;
+    size_t size = increment, initial_size = 0;
 
     try
     {
         for (auto i = 0; i < 100; ++i)
         {
-            my_allocation(tab_float, 0, size);
+            my_allocation(tab_float, initial_size, size);
+            initial_size = size;
+            size += increment;
         }
     }
     catch (const bad_alloc &e)
@@ -68,9 +72,13 @@ int main()
              << e.what()
              << endl;
     }
+    
+    delete[] tab_float;
 
+    size = 0;
     for (auto i = 0; i < 100; ++i)
     {
         my_allocation_using_C(tab_float_using_C, size);
+        size += increment;
     }
 }
