@@ -50,12 +50,12 @@ void my_allocation_using_C(T_ *&ptr, const size_t &new_size)
 
 int main()
 {
-    const size_t increment = 1 << 18;
+    const size_t increment = 1 << 10;
     cout << increment << endl;
     float *tab_float = nullptr;
     float *tab_float_using_C = nullptr;
     size_t size = increment, initial_size = 0;
-
+    auto time_start = chrono::high_resolution_clock::steady_clock::now();
     try
     {
         for (auto i = 0; i < 100; ++i)
@@ -72,13 +72,22 @@ int main()
              << e.what()
              << endl;
     }
-    
+
+    auto time_end = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<chrono::microseconds>(time_end - time_start);
+    std::cout << duration.count() << " microseconds(s) for new" << endl;
+
     delete[] tab_float;
 
     size = 0;
+    time_start = chrono::high_resolution_clock::steady_clock::now();
     for (auto i = 0; i < 100; ++i)
     {
         my_allocation_using_C(tab_float_using_C, size);
         size += increment;
     }
+    time_end = chrono::high_resolution_clock::now();
+    duration = chrono::duration_cast<chrono::microseconds>(time_end - time_start);
+    std::cout << duration.count() << " microseconds(s) for realloc" << endl;
+    free(tab_float_using_C);
 }
