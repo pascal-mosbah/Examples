@@ -8,7 +8,6 @@ using namespace std;
 template <typename T_>
 void my_allocation(T_ *&ptr, const size_t &old_size, const size_t &new_size)
 {
-    static unsigned count = 1;
     if (ptr)
     {
         auto new_ptr = new T_[new_size];
@@ -20,7 +19,6 @@ void my_allocation(T_ *&ptr, const size_t &old_size, const size_t &new_size)
     {
         ptr = new T_[new_size];
     }
-    ++count;
 }
 
 template <typename T_>
@@ -50,12 +48,12 @@ void my_allocation_using_C(T_ *&ptr, const size_t &new_size)
 
 int main()
 {
-    const size_t increment = 1 << 10;
+    const size_t increment = 1 << 16;
     cout << increment << endl;
     float *tab_float = nullptr;
     float *tab_float_using_C = nullptr;
     size_t size = increment, initial_size = 0;
-    auto time_start = chrono::high_resolution_clock::steady_clock::now();
+    auto time_start = chrono::high_resolution_clock::now();
     try
     {
         for (auto i = 0; i < 100; ++i)
@@ -80,7 +78,7 @@ int main()
     delete[] tab_float;
 
     size = 0;
-    time_start = chrono::high_resolution_clock::steady_clock::now();
+    time_start = chrono::high_resolution_clock::now();
     for (auto i = 0; i < 100; ++i)
     {
         my_allocation_using_C(tab_float_using_C, size);
