@@ -5,4 +5,5 @@ PROJECT(all)
 add_subdirectory(First_CMake)
 add_subdirectory(various)
 add_subdirectory(TP)
+add_subdirectory(corrigés)
 
