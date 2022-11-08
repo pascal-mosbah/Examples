@@ -5,4 +5,4 @@ PROJECT(projet)
 add_subdirectory(Boost_JSON)
 add_subdirectory(socket)
 add_subdirectory(thread)
-
+add_subdirectory(test_wxWidgets)
