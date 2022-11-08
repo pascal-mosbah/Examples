@@ -17,8 +17,5 @@ endif (MSVC)
 find_package(Boost 1.80.0 COMPONENTS json REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
-set(read_json_src read_json.cpp)
-add_executable(read_json ${read_json_src})
-
-set(write_json_src write_json.cpp)
-add_executable(write_json ${write_json_src})
+set(write_read_json_src write_read_json.cpp)
+add_executable(write_read_json ${write_read_json_src})
