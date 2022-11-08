@@ -17,6 +17,14 @@ endif (MSVC)
 
 find_package(Boost 1.80.0 COMPONENTS system thread regex serialization REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS} ../thread)
+link_directories(${Boost_LIBRARY_DIRS})
 
 set(server_src server/socket_example_server.cpp "../thread/some_defines.cpp")
 add_executable(server ${server_src})
+
+
+# set(client_src client/socket_example_client.cpp "../thread/some_defines.cpp")
+# add_executable(client ${client_src})
+
+# set(run_client_instances_src run_client_instances/run_client_instances.cpp "../thread/some_defines.cpp")
+# add_executable(run_client_instances ${run_client_instances_src})
