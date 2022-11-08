@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <iterator>
 #include <string>
 #include <random>
 #include <chrono>
@@ -7,6 +8,7 @@
 #else
 #include <unistd.h>
 #endif
+#include <iostream>
 
 using std::default_random_engine;
 using std::random_device;
@@ -46,5 +48,7 @@ int main()
 #else
      string command{"../bin/socket_example_client 0"};
 #endif
-     system(command.c_str());
+     if(!system(command.c_str())) {
+          std::cout <<"Command successfull"<<std::endl;
+     }
 }

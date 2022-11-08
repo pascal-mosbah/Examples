@@ -8,9 +8,9 @@ set(Boost_USE_RELEASE_LIBS ON)
 
 if(MSVC)
     add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
     set(Boost_USE_STATIC_RUNTIME ON)
-        set(Boost_DIR "C:/tools/Boost/lib/cmake/Boost-1.80.0")
+    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+    set(Boost_DIR "C:/tools/Boost/lib/cmake/Boost-1.80.0")
 elseif(MSVC)
     set(Boost_DIR /usr/local/lib/cmake/Boost-1.80.0)
 endif (MSVC)
@@ -21,10 +21,13 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 set(server_src server/socket_example_server.cpp "../thread/some_defines.cpp")
 add_executable(server ${server_src})
+target_link_libraries(server LINK_PUBLIC ${Boost_LIBRARIES})
 
 
 set(client_src client/socket_example_client.cpp "../thread/some_defines.cpp")
 add_executable(client ${client_src})
+target_link_libraries(client LINK_PUBLIC ${Boost_LIBRARIES})
 
 set(run_client_instances_src run_client_instances/run_client_instances.cpp "../thread/some_defines.cpp")
 add_executable(run_client_instances ${run_client_instances_src})
+target_link_libraries(run_client_instances LINK_PUBLIC ${Boost_LIBRARIES})
