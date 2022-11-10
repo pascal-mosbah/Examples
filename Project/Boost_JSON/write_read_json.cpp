@@ -1,33 +1,13 @@
 #include <boost/property_tree/json_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
 #include <fstream>
-#include <iostream>
-#include <string>
-#include <utility>
-#include <vector>
+
+#include "Customer.hpp"
 
 using boost::property_tree::ptree;
 using boost::property_tree::read_json;
 using boost::property_tree::write_json;
 
-struct Customer {
-  Customer(const int &number, std::string &&name,
-           // std::vector<std::pair<std::string, int>>&& account_numbers)
-           std::vector<int> &&account_numbers)
-      : number_(number), name_(name), account_numbers_(account_numbers) {}
-  int number_ = 0;
-  std::string name_;
-  std::vector<int> account_numbers_;
-};
-
-std::ostream &operator<<(std::ostream &os, const Customer &customer) {
-  os << "Name " << customer.name_ << std::endl;
-  os << "Number " << customer.number_ << std::endl;
-  for (auto &account : customer.account_numbers_) {
-    std::cout << "Account_Number : " << account << std::endl;
-  }
-  return os;
-}
 
 enum class Account_type { Checking, Savings };
 
