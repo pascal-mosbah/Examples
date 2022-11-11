@@ -4,8 +4,14 @@
 #include <utility>
 #include <vector>
 
+#ifdef _WIN32
+#include <SDKDDKVer.h>
+#endif
+
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/vector.hpp>
+
 
 struct Customer {
   Customer();
@@ -18,7 +24,7 @@ struct Customer {
   template <class Archive>
      void serialize(Archive &ar, unsigned int version)
      {
-          // ar & name_;
-          // ar & account_numbers_;
+          ar & name_;
+          ar & account_numbers_;
      }
 };

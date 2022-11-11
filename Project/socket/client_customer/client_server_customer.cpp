@@ -1,11 +1,11 @@
 
 #include <iostream>
 #include <thread>
-#include <boost/asio.hpp>
-#include <boost/archive/binary_iarchive.hpp>
-#include <boost/archive/binary_oarchive.hpp>
 
 #include "Customer.hpp"
+
+#include <boost/asio.hpp>
+
 
 using namespace boost::asio;
 using ip::tcp;
@@ -28,21 +28,19 @@ void receive_data_through_socket(tcp::socket &socket, Customer &customer)
     // boost::archive::binary_iarchive ar(is);
     // ar >> customer;
 
-     boost::system::error_code ec;
-     boost::asio::streambuf buf;
-     asio::read(socket, buf, ec);
-    if (ec && ec != asio::error::eof) {
-        std::cout << "Read error: " << ec.message() << "\n";
-        return 1;
-    }
-
-    Test response; // uninitialized
+    boost::system::error_code ec;
+    boost::asio::streambuf buf;
+    boost::asio::read(socket, buf, ec);
+    if (ec && ec != boost::asio::error::eof)
     {
-        std::istream is(&buf);
-        boost::archive::binary_iarchive ia(is);
-
-        ia >> response;
+        std::cout << "Read error: " << ec.message() << "\n";
+        return;
     }
+
+    std::istream is(&buf);
+    boost::archive::text_iarchive ia(is);
+
+    ia >> customer;
 }
 
 void client_server_server()
@@ -70,15 +68,10 @@ size_t send_data_through_socket(tcp::socket &socket, Customer &customer)
 {
     boost::asio::streambuf buf;
     std::ostream os(&buf);
-    boost::archive::binary_oarchive ar(os);
+    boost::archive::text_oarchive ar(os);
     ar << customer;
     std::cout << customer;
-
-    const size_t header = buf.size();
-    std::vector<boost::asio::const_buffer> buffers;
-    buffers.push_back(boost::asio::buffer(&header, sizeof(header)));
-    buffers.push_back(buf.data());
-    return boost::asio::write(socket, buffers);
+    return boost::asio::write(socket, buf);
 }
 
 void client_server_client(Customer &customer)
@@ -91,7 +84,7 @@ void client_server_client(Customer &customer)
 
     boost::asio::streambuf buf;
     std::ostream os(&buf);
-    boost::archive::binary_oarchive ar(os);
+    boost::archive::text_oarchive ar(os);
     ar << customer;
 
     boost::asio::write(socket, buf);

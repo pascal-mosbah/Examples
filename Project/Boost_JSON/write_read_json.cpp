@@ -2,6 +2,10 @@
 #include <boost/property_tree/ptree.hpp>
 #include <fstream>
 
+#ifdef _WIN32
+#include <SDKDDKVer.h>
+#endif
+
 #include "Customer.hpp"
 
 using boost::property_tree::ptree;
