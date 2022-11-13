@@ -34,4 +34,4 @@ target_link_libraries(run_client_instances LINK_PUBLIC ${Boost_LIBRARIES})
 
 # set(client_server_customer_src client_customer/client_server_customer.cpp)
 # add_executable(client_server_customer ${client_server_customer_src})
-# target_link_libraries (client_server_customer LINK_PUBLIC customer)
+# target_link_libraries (client_server_customer LINK_PUBLIC customer ${Boost_LIBRARIES})

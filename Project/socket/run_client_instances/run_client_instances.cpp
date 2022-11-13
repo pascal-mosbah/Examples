@@ -33,11 +33,11 @@ int main()
      while (true && count < 10)
      {
 #ifdef _WIN32
-          string command{"start ..\\bin\\socket_example_client " + add_plane()};
+          string command{"start .\client " + add_plane()};
           system(command.c_str());
           Sleep(seconds * 1000);
 #else
-          string command{"../bin/socket_example_client " + add_plane() + "&"};
+          string command{"./client " + add_plane() + "&"};
           system(command.c_str());
           sleep(seconds);
 #endif
@@ -46,7 +46,7 @@ int main()
 #ifdef _WIN32
      string command{"start ..\\bin\\socket_example_client 0"};
 #else
-     string command{"../bin/socket_example_client 0"};
+     string command{"./client 0"};
 #endif
      if(!system(command.c_str())) {
           std::cout <<"Command successfull"<<std::endl;

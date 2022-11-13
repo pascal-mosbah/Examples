@@ -24,7 +24,6 @@ struct Customer {
   template <class Archive>
      void serialize(Archive &ar, unsigned int version)
      {
-          ar & name_;
-          ar & account_numbers_;
+          ar & name_ & number_ & account_numbers_;
      }
 };
