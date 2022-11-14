@@ -9,7 +9,9 @@ set(Boost_USE_RELEASE_LIBS ON)
 if(MSVC)
     add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
     set(Boost_USE_STATIC_RUNTIME ON)
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
+    add_compile_options($<$<CONFIG:Release>:/MT> # Runtime library: Multi-threaded
+                      $<$<CONFIG:Debug>:/MTd> # Runtime library: Multi-threaded Debug
+                      )
     set(Boost_DIR "C:/tools/Boost/lib/cmake/Boost-1.80.0")
 elseif(MSVC)
     set(Boost_DIR /usr/local/lib/cmake/Boost-1.80.0)
@@ -22,9 +24,3 @@ set(SRCS "Customer.cpp")
 
 add_library (customer ${SRCS})
 target_include_directories (customer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
-
-if(MSVC)
-	add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-    set_property(TARGET customer PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
-endif (MSVC)

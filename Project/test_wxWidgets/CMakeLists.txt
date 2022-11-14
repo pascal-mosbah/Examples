@@ -3,8 +3,10 @@ project(myapp)
 
 if(MSVC)
     set(wxWidgets_ROOT_DIR  "C:/tools/wxWidgets")
-    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
-    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+    set(CMAKE_PREFIX_PATH  C:/tools/wxWidgets)
+    add_compile_options($<$<CONFIG:Release>:/MT> # Runtime library: Multi-threaded
+                      $<$<CONFIG:Debug>:/MTd> # Runtime library: Multi-threaded Debug
+                      )
 endif (MSVC)
 
 find_package(wxWidgets REQUIRED COMPONENTS net core base)
