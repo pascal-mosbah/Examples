@@ -37,13 +37,18 @@ add_executable(run_client_instances ${run_client_instances_src})
 target_link_libraries(run_client_instances LINK_PUBLIC ${Boost_LIBRARIES})
 set_property(TARGET run_client_instances PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
-set(server_customer_src client_customer/server_customer.cpp client_customer/send_receive.cpp)
-add_executable(server_customer ${server_customer_src})
-target_link_libraries (server_customer LINK_PUBLIC customer ${Boost_LIBRARIES})
+# set(server_customer_src client_customer/server_customer.cpp client_customer/send_receive.cpp)
+# add_executable(server_customer ${server_customer_src})
+# target_link_libraries (server_customer LINK_PUBLIC customer ${Boost_LIBRARIES})
 
 # set(client_customer_src client_customer/client_customer.cpp client_customer/send_receive.cpp)
 # add_executable(client_customer ${client_customer_src})
 # target_link_libraries (client_customer LINK_PUBLIC customer ${Boost_LIBRARIES})
 
-# set(test_socket_src test_socket/test_socket.cpp)
-# add_executable(test_socket ${test_socket_src})
+# set(test_socket_server_src test_socket/blocking_tcp_echo_server.cpp)
+# add_executable(blocking_tcp_echo_server ${test_socket_server_src})
+# target_link_libraries (blocking_tcp_echo_server LINK_PUBLIC customer ${Boost_LIBRARIES})
+
+# set(test_socket_client_src test_socket/blocking_tcp_echo_client.cpp)
+# add_executable(blocking_tcp_echo_client ${test_socket_client_src})
+# target_link_libraries (blocking_tcp_echo_client LINK_PUBLIC customer ${Boost_LIBRARIES})

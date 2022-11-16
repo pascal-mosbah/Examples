@@ -25,6 +25,7 @@ auto client_server_client(Customer &customer)
 
     send_data_through_socket(*socket, customer);
 
+    send_data_through_socket(*socket, customer);
     //  // getting response from server
 
     // boost::system::error_code error;
@@ -40,6 +41,7 @@ auto client_server_client(Customer &customer)
     //     const char *data = boost::asio::buffer_cast<const char *>(receive_buffer.data());
     //     std::cout << data << std::endl;
     // }
+   
     return socket;
 }
 
@@ -52,7 +54,7 @@ int main(int argc, char *argv[])
 
     auto socket = client_server_client(customer1);
     std::cout << "Passage client begin" << std::endl;
-    receive_data_through_socket(*socket, customer1);
+    // receive_data_through_socket(*socket, customer1);
     std::cout << "Passage client end" << std::endl;
 
     exit(EXIT_SUCCESS);

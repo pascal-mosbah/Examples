@@ -40,7 +40,12 @@ auto client_server_server()
 
   
     // }
+     int a;
+    std::cin >> a;
     std::cout << "Passage server end" << std::endl;
+        receive_data_through_socket(*socket, customer);
+        std::cout << "Server received\n"
+                  << customer << std::endl;
     std::this_thread::sleep_for(2s);
     return socket;
 }
@@ -56,7 +61,7 @@ int main(int argc, char *argv[])
     // std::thread server(client_server_server);
     auto socket = client_server_server();
     // std::this_thread::sleep_for(2s);
-      send_data_through_socket(*socket, customer1);
+    //   send_data_through_socket(*socket, customer1);
     // server.join();
 
     exit(EXIT_SUCCESS);
