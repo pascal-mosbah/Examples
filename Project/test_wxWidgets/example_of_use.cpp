@@ -87,6 +87,7 @@ void MyFrame::OnAdd_Customer(wxCommandEvent &event)
         std::string name = std::string(customer_name);
         Customer customer(number, std::move(name), {1000});
         customers_.push_back(customer);
+        delete new_customer;
     }
 }
 
@@ -99,7 +100,6 @@ void MyFrame::OnSaveCustomers(wxCommandEvent &event)
         for (auto &customer : customers_)
         {
             pt_accounts.push_back({"", get_a_ptree_from_a_customer(customer)});
-                    wxMessageBox(customer.name_, "test", wxOK | wxICON_INFORMATION);
         }
         pt_write.add_child("Customers", pt_accounts);
         std::ofstream file_out("example_write_read.json");
