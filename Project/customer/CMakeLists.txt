@@ -20,7 +20,7 @@ endif (MSVC)
 find_package(Boost 1.80.0 COMPONENTS serialization REQUIRED)
 include_directories(${Boost_INCLUDE_DIRS})
 
-set(SRCS "Customer.cpp")
+set(SRCS "Customer.cpp" "Customer_for_JSON.cpp")
 
 add_library (customer ${SRCS})
 target_include_directories (customer PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
